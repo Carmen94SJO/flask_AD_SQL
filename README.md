@@ -1,5 +1,3 @@
-
-````markdown
 # SQL Dashboard - Sakila Database
 
 ![Python](https://img.shields.io/badge/python-3.8%2B-blue)
@@ -18,15 +16,14 @@
 6. [Configuración del Entorno Virtual (venv)](#configuración-del-entorno-virtual-venv)
 7. [Configuración de la Base de Datos](#configuración-de-la-base-de-datos)
 8. [Estructura del Proyecto](#estructura-del-proyecto)
-9. [Tablas Accesibles](#tablas-accesibles)
-10. [Puesta en Marcha](#puesta-en-marcha)
-11. [Uso de la Aplicación](#uso-de-la-aplicación)
-12. [Gestión y Control de Errores](#gestión-y-control-de-errores)
-13. [Funcionalidades Adicionales](#funcionalidades-adicionales)
-14. [Capturas de Pantalla](#capturas-de-pantalla)
-15. [Contribución](#contribución)
-16. [Licencia](#licencia)
-17. [Autoría](#autoría)
+9. [Dependencias](#dependencias)
+10. [Tablas Accesibles](#tablas-accesibles)
+11. [Puesta en Marcha](#puesta-en-marcha)
+12. [Uso de la Aplicación](#uso-de-la-aplicación)
+13. [Gestión y Control de Errores](#gestión-y-control-de-errores)
+14. [Funcionalidades Adicionales](#funcionalidades-adicionales)
+15. [Capturas de Pantalla](#capturas-de-pantalla)
+16. [Autoría](#autoría)
 
 ---
 
@@ -55,25 +52,25 @@ El sistema está desarrollado con **Flask** como framework web, **MySQL** como m
 
 ## Tecnologías Utilizadas
 
-- **Python 3.x**  
-- **Flask**  
-- **MySQL Server**  
-- **mysqlclient** (MySQLdb para Python)  
-- **HTML5 / Tailwind CSS**  
-- **Chart.js**  
-- **Visual Studio Code**  
+- **Python 3.x**
+- **Flask**
+- **MySQL Server**
+- **mysqlclient** (MySQLdb para Python)
+- **HTML5 / Tailwind CSS**
+- **Chart.js**
+- **Visual Studio Code**
 
 ---
 
 ## Requisitos Previos
 
-1. Python 3.8 o superior.  
-2. MySQL Server con la base de datos **Sakila** importada.  
+1. Python 3.8 o superior.
+2. MySQL Server con la base de datos **Sakila** importada.
 3. Dependencias de Python (instaladas dentro del entorno virtual):
 
 ```bash
 pip install -r requirements.txt
-````
+```
 
 ---
 
@@ -162,6 +159,27 @@ my_flask_app/
 
 ---
 
+## Dependencias
+
+Archivo `requirements.txt`:
+
+```
+blinker==1.9.0
+click==8.3.0
+colorama==0.4.6
+Flask==3.1.2
+itsdangerous==2.2.0
+Jinja2==3.1.6
+MarkupSafe==3.0.3
+mysql-connector-python==9.5.0
+setuptools==65.5.0
+Werkzeug==3.1.3
+```
+
+> Instala estas dependencias dentro del entorno virtual antes de ejecutar la aplicación.
+
+---
+
 ## Tablas Accesibles
 
 | Tabla    | Descripción               |
@@ -234,22 +252,8 @@ http://127.0.0.1:5000/
 
 ---
 
-## Contribución
-
-Si deseas contribuir al proyecto, haz un fork y envía pull requests.
-
----
-
-## Licencia
-
-Proyecto bajo licencia **MIT**.
-
----
-
 ## Autoría
 
 Desarrollado como proyecto académico y de portfolio con **Flask**, **SQL** y visualización de datos.
 
 **Carmen Victoria Casas Novas Garcia**
-
-```
