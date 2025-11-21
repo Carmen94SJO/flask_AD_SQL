@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Dashboard - Sakila</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.4/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+<div class="flex min-h-screen">
+
+    <!-- Menú lateral -->
+    <aside class="w-72 bg-gradient-to-b from-blue-700 to-blue-900 text-white p-6 flex flex-col justify-between shadow-xl">
+        <div>
+            <h2 class="text-2xl font-bold mb-8 text-center">🧩 SQL Dashboard</h2>
+
+            <h3 class="text-sm uppercase font-semibold mb-4 text-gray-200 tracking-widest">Consultas rápidas</h3>
+
+            <form method="POST" class="mb-3">
+                <input type="hidden" name="query" value="SELECT film_id, title, release_year FROM film LIMIT 10;">
+                <button class="quick-btn bg-blue-500 hover:bg-blue-600">🎬 Top 10 Películas</button>
+            </form>
+            <form method="POST" class="mb-3">
+                <input type="hidden" name="query" value="SELECT f.title, c.name AS category FROM film f JOIN film_category fc ON f.film_id = fc.film_id JOIN category c ON fc.category_id = c.category_id WHERE c.name = 'Comedy';">
+                <button class="quick-btn bg-emerald-500 hover:bg-emerald-600">😂 Comedias</button>
+            </form>
+            <form method="POST" class="mb-3">
+                <input type="hidden" name="query" value="SELECT first_name, last_name FROM actor LIMIT 10;">
+                <button class="quick-btn bg-orange-500 hover:bg-orange-600">🎭 Actores</button>
+            </form>
+            <form method="POST">
+                <input type="hidden" name="query" value="SELECT customer_id, first_name, last_name FROM customer LIMIT 10;">
+                <button class="quick-btn bg-purple-500 hover:bg-purple-600">👥 Clientes</button>
+            </form>
+        </div>
+
+        <p class="text-xs text-gray-400 text-center mt-6">Base de datos: <span class="font-semibold text-white">sakila</span></p>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="flex-1 p-10 bg-gray-50">
+        <h1 class="text-3xl font-bold mb-6 text-gray-700">📊 Consultas SQL Interactivas</h1>
+
+        <!-- Gráfico -->
+        <h2 class="text-2xl font-bold mt-10 mb-4 text-gray-700">🎬 Top 5 Categorías con Más Películas</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <canvas id="myChart"></canvas>
+        </div>
+        <script>
+            const labels = {{ chart_labels | tojson | safe }};
+            const values = {{ chart_values | tojson | safe }};
+            new Chart(document.getElementById('myChart'), {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Cantidad de películas',
+                        data: values,
+                        backgroundColor: 'rgba(37, 99, 235, 0.5)',
+                        borderColor: 'rgb(37, 99, 235)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        </script>
+
+        <!-- Formulario SQL -->
+        <form method="POST" class="mb-6 mt-6">
+            <textarea name="query" rows="4" class="w-full border border-gray-300 rounded-lg p-3 font-mono text-sm focus:ring-2 focus:ring-blue-400 focus:outline-none shadow-sm"
+                placeholder="Escribe tu consulta SQL aquí...">{{ query or '' }}</textarea>
+            <button type="submit" class="mt-3 px-6 py-2 bg-blue-600 text-white rounded-md font-semibold hover:bg-blue-700 transition">
+                ▶️ Ejecutar consulta
+            </button>
+        </form>
+
+        <!-- Mensaje de error -->
+        {% if error %}
+        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded mb-4 shadow">{{ error }}</div>
+        {% endif %}
+
+        <!-- Resultados -->
+        {% if rows %}
+        <div class="overflow-x-auto mt-6 bg-white shadow-md rounded-lg">
+            <table class="min-w-full text-sm text-left border-collapse">
+                <thead class="bg-blue-600 text-white">
+                    <tr>
+                        {% for col in columns %}
+                        <th class="px-4 py-3 font-semibold border-b border-blue-500">{{ col }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    {% for row in rows %}
+                    <tr class="hover:bg-blue-50">
+                        {% for cell in row %}
+                        <td class="px-4 py-2 text-gray-700">{{ cell }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+
+    </main>
+</div>
+</body>
+</html>

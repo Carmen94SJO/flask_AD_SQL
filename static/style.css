@@ -1,0 +1,222 @@
+/* 🌐 Fuente y fondo general */
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+    background: #f3f6fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* 🧭 Contenedor principal */
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    align-items: flex-start; /* ✅ asegura que aside y main empiecen al mismo nivel */
+}
+
+/* 🏠 Contenido principal */
+main {
+    flex: 1 1 700px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    padding: 30px;
+}
+
+/* 🧩 Panel lateral (alineado con main) */
+aside {
+    flex: 0 0 280px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 30px; /* ✅ igual que main */
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    /* ❌ quitamos align-self para alinear */
+}
+
+/* 📱 En pantallas pequeñas: apilar elementos */
+@media (max-width: 900px) {
+    .flex {
+        flex-direction: column-reverse;
+        padding: 10px;
+        align-items: stretch;
+    }
+
+    main, aside {
+        width: 100%;
+        flex: 1 1 100%;
+    }
+
+    aside {
+        order: 1;
+    }
+}
+
+
+/* 🎬 Títulos */
+h1, h2 {
+    color: #1a202c;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+aside h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #374151;
+    text-align: center;
+}
+
+/* 📝 Formularios */
+form textarea {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    padding: 14px;
+    font-family: monospace;
+    font-size: 15px;
+    background: #f9fafb;
+    transition: all 0.3s ease;
+    resize: vertical;
+}
+
+form textarea:focus {
+    border-color: #2563eb;
+    background: #fff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(37,99,235,0.3);
+}
+
+form button {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+form button:hover {
+    background: #1e40af;
+    transform: translateY(-2px);
+}
+
+/* 🔘 Botones rápidos */
+aside button {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+aside button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+/* Colores personalizados para cada botón */
+.bg-green-600 { background: #16a34a; }
+.bg-green-600:hover { background: #15803d; }
+
+.bg-purple-600 { background: #9333ea; }
+.bg-purple-600:hover { background: #7e22ce; }
+
+.bg-orange-600 { background: #ea580c; }
+.bg-orange-600:hover { background: #c2410c; }
+
+.bg-blue-600 { background: #2563eb; }
+.bg-blue-600:hover { background: #1e40af; }
+
+/* 📊 Tabla de resultados */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    font-size: 14px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+thead {
+    background: #2563eb;
+    color: #fff;
+}
+
+thead th {
+    padding: 14px;
+    text-align: left;
+    font-weight: 600;
+}
+
+tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+    transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+    background: #f9fafb;
+}
+
+tbody td {
+    padding: 12px;
+}
+
+/* ⚠️ Mensajes de error */
+.bg-red-100 {
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 14px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* 📘 Bloque de ejemplos */
+.examples, .mt-6 {
+    margin-top: 30px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.examples h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #374151;
+}
+
+.examples pre {
+    background: #1f2937;
+    color: #f9fafb;
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    overflow-x: auto;
+}
+
+/* 🌈 Efecto hover general */
+button, textarea, table {
+    transition: all 0.2s ease-in-out;
+}
